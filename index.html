@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ders Müsaitlik Formu</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background-decoration decoration-1">✦</div>
+    <div class="background-decoration decoration-2">●</div>
+    <div class="background-decoration decoration-3">✿</div>
+
+<!-- BİLGİLENDİRME POP-UP -->
+
+<div class="info-popup">
+
+    <div class="info-popup-icon">
+        💡
+    </div>
+
+    <div class="info-popup-content">
+
+        <div class="info-popup-title">
+            Bilgilendirme
+        </div>
+
+        <p>
+            Bu form, herkesin müsaitlik durumunu
+            öğrenmek ve buna göre haftalık bir ders
+            programı oluşturmak amacıyla hazırlanmıştır.
+        </p>
+        <p>
+            Mümkün olduğunca <strong>hafta içerisindeki tüm müsait olduğunuz
+            gün ve saatleri</strong> belirtmenizi rica ederim. 🌸
+            Örneğin haftada 2 gün ders yapmak isteseniz bile, diğer günlerde
+            de müsait olduğunuz zamanlar varsa onları da seçmeniz, herkesin
+            programını en uygun şekilde oluşturabilmem açısından çok yardımcı olacaktır.
+        </p>
+
+    </div>
+
+</div>
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <div class="header-icon">
+                📚
+            </div>
+
+            <h1>Ders Müsaitlik Formu</h1>
+
+            <p>
+                Size uygun olan gün ve saatleri seçerek
+                müsaitliklerinizi paylaşabilirsiniz.
+            </p>
+
+        </header>
+
+
+        <!-- ÖĞRENCİ BİLGİLERİ -->
+
+        <section class="card student-card">
+
+            <div class="section-title">
+
+                <div class="card-icon purple">
+                    👩‍🎓
+                </div>
+
+                <div>
+
+                    <h2>Öğrenci Bilgileri</h2>
+
+                    <p>
+                        Bilgilerinizi girerek başlayınız.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <label for="studentName">
+                Öğrenci adı
+            </label>
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Örn. Ayşe"
+                autocomplete="off"
+            >
+
+
+            <label
+                for="editCode"
+                class="code-label"
+            >
+                Düzenleme kodu
+            </label>
+
+            <input
+                type="password"
+                id="editCode"
+                placeholder="4 haneli kod"
+                maxlength="4"
+                inputmode="numeric"
+                autocomplete="off"
+            >
+
+
+            <div class="code-info">
+                🔐 Bu kodu unutmayınız.
+                Daha sonra müsaitliklerinizi değiştirmek
+                için kullanabilirsiniz.
+            </div>
+
+
+            <div
+                id="editingBadge"
+                class="editing-badge hidden"
+            ></div>
+
+        </section>
+
+
+        <!-- GÖNDER BUTONU -->
+
+        <button
+            id="saveButton"
+            class="save-button"
+            type="button"
+        >
+            🚀 Müsaitliklerimi Gönder
+        </button>
+
+
+        <!-- DÜZENLEME BUTONU -->
+
+        <button
+            id="editFormButton"
+            class="edit-button"
+            type="button"
+        >
+            ✏️ Müsaitliklerimi Düzenle
+        </button>
+
+
+        <!-- GÜNLER -->
+
+        <section class="days-section">
+
+            <div class="section-heading">
+
+                <div class="heading-icon">
+                    🗓️
+                </div>
+
+                <div>
+
+                    <h2>
+                        Müsait olduğunuz zamanlar
+                    </h2>
+
+                    <p>
+                        Birden fazla gün ve saat
+                        seçebilirsiniz.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                💡 Saat seçtiğinizde ders süresini
+                <strong>1, 1,5 veya 2 saat</strong>
+                olarak belirleyebilirsiniz.
+
+            </div>
+
+
+            <div id="daysContainer"></div>
+
+        </section>
+
+
+        <!-- ALT BİLGİ -->
+
+        <div class="bottom-note">
+
+            🌸 Seçtiğiniz saatler mor renkte görünür.
+            Aynı saat birden fazla öğrenci tarafından
+            seçilebilir.
+
+        </div>
+
+    </div>
+
+
+    <script
+        type="module"
+        src="app.js"
+    ></script>
+
+</body>
+
+</html>

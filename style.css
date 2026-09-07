@@ -1,0 +1,929 @@
+
+/* ========================================
+   GENEL
+======================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            #eee9ff 0,
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            #ffe5f1 0,
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            #e2f8f2 0,
+            transparent 35%
+        ),
+        #f8f9ff;
+
+    color: #292642;
+
+    min-height: 100vh;
+
+    padding: 40px 15px;
+
+    overflow-x: hidden;
+}
+
+
+/* ========================================
+   ARKA PLAN
+======================================== */
+
+.background-decoration {
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    opacity: 0.45;
+}
+
+.decoration-1 {
+    top: 80px;
+    left: 5%;
+
+    color: #8b7cf6;
+
+    font-size: 45px;
+}
+
+.decoration-2 {
+    right: 7%;
+    top: 40%;
+
+    color: #ff91b9;
+
+    font-size: 35px;
+}
+
+.decoration-3 {
+    left: 4%;
+    bottom: 10%;
+
+    color: #61cdb5;
+
+    font-size: 40px;
+}
+
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.container {
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+
+    max-width: 850px;
+
+    margin: 0 auto;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.header {
+    text-align: center;
+
+    margin-bottom: 28px;
+}
+
+.header-icon {
+    width: 72px;
+    height: 72px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8b7cf6,
+            #b78cff
+        );
+
+    border-radius: 22px;
+
+    font-size: 35px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(123, 100, 230, 0.25);
+
+    transform: rotate(-3deg);
+}
+
+.header h1 {
+    font-size: 32px;
+
+    margin-bottom: 8px;
+
+    color: #302a55;
+}
+
+.header p {
+    color: #77738b;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   CARD
+======================================== */
+
+.card,
+.day-card {
+    background:
+        rgba(255, 255, 255, 0.94);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.8);
+
+    border-radius: 22px;
+
+    padding: 25px;
+
+    margin-bottom: 18px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(61, 47, 110, 0.08);
+
+    backdrop-filter: blur(10px);
+}
+
+
+/* ========================================
+   BAŞLIKLAR
+======================================== */
+
+.section-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+}
+
+.section-title h2,
+.section-heading h2 {
+    font-size: 20px;
+
+    color: #302a55;
+
+    margin-bottom: 5px;
+}
+
+.section-title p,
+.section-heading p {
+    color: #888498;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   ICONLAR
+======================================== */
+
+.card-icon {
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    font-size: 22px;
+}
+
+.card-icon.purple {
+    background: #eeeaff;
+}
+
+.heading-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #fff0f6;
+
+    border-radius: 15px;
+
+    font-size: 23px;
+}
+
+
+/* ========================================
+   INPUT
+======================================== */
+
+.student-card label {
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #4a4560;
+
+    margin-bottom: 9px;
+}
+
+.student-card input {
+    width: 100%;
+
+    padding: 15px 16px;
+
+    border:
+        2px solid
+        #eceaf3;
+
+    border-radius: 13px;
+
+    background: #fafaff;
+
+    font-size: 15px;
+
+    color: #302a55;
+
+    outline: none;
+
+    transition: 0.2s;
+
+    margin-bottom: 5px;
+}
+
+.student-card input:focus {
+    border-color: #8b7cf6;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(139, 124, 246, 0.1);
+}
+
+.code-label {
+    margin-top: 13px;
+}
+
+
+/* ========================================
+   KOD BİLGİSİ
+======================================== */
+
+.code-info {
+    margin-top: 8px;
+
+    padding: 10px 12px;
+
+    background: #fff8e9;
+
+    border:
+        1px solid
+        #f5e5bd;
+
+    border-radius: 10px;
+
+    color: #8b7440;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   DÜZENLEME BİLDİRİMİ
+======================================== */
+
+.editing-badge {
+    margin-top: 14px;
+
+    padding: 11px 13px;
+
+    border-radius: 11px;
+
+    background: #e8f8f2;
+
+    border:
+        1px solid
+        #c9ecdf;
+
+    color: #3e806c;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* ========================================
+   GÖNDER BUTONU
+======================================== */
+
+.save-button {
+    width: 100%;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7b6cf3,
+            #a17cff
+        );
+
+    color: white;
+
+    padding: 17px;
+
+    border-radius: 14px;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    margin-bottom: 10px;
+
+    box-shadow:
+        0 8px 22px
+        rgba(123, 108, 243, 0.25);
+
+    transition: 0.2s;
+}
+
+.save-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(123, 108, 243, 0.32);
+}
+
+.save-button:active {
+    transform: translateY(0);
+}
+
+.save-button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* ========================================
+   DÜZENLE BUTONU
+======================================== */
+
+.edit-button {
+    width: 100%;
+
+    padding: 13px;
+
+    border:
+        2px solid
+        #e3def7;
+
+    background: white;
+
+    color: #675e82;
+
+    border-radius: 13px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    margin-bottom: 28px;
+
+    transition: 0.2s;
+}
+
+.edit-button:hover {
+    border-color: #9b8cf5;
+
+    background: #faf9ff;
+
+    color: #574b9b;
+}
+
+
+/* ========================================
+   GÜNLER
+======================================== */
+
+.days-section {
+    margin-bottom: 20px;
+}
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 15px;
+}
+
+
+/* ========================================
+   BİLGİ KUTUSU
+======================================== */
+
+.info-box {
+    background:
+        linear-gradient(
+            135deg,
+            #f2efff,
+            #fff0f7
+        );
+
+    border:
+        1px solid
+        #e9e3ff;
+
+    color: #665d87;
+
+    border-radius: 14px;
+
+    padding: 13px 16px;
+
+    margin-bottom: 16px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   GÜN CARD
+======================================== */
+
+.day-card {
+    padding: 21px;
+
+    transition: 0.2s;
+}
+
+.day-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 35px
+        rgba(61, 47, 110, 0.11);
+}
+
+.day-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 17px;
+
+    padding-bottom: 13px;
+
+    border-bottom:
+        1px solid
+        #f0eef6;
+}
+
+.day-name {
+    font-size: 19px;
+
+    font-weight: 800;
+
+    color: #39325d;
+}
+
+.day-info {
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #8e88a1;
+
+    background: #f5f3fa;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+}
+
+
+/* ========================================
+   SAATLER
+======================================== */
+
+.time-grid {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.time-wrapper {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    min-width: 72px;
+}
+
+.time-button {
+    position: relative;
+
+    z-index: 2;
+
+    min-width: 72px;
+
+    border:
+        2px solid
+        #eceaf3;
+
+    background: white;
+
+    color: #45405b;
+
+    padding: 11px 13px;
+
+    border-radius: 11px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s,
+        border-color 0.18s,
+        background 0.18s,
+        box-shadow 0.18s;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.time-button:hover {
+    border-color: #a496ff;
+
+    background: #f8f6ff;
+
+    transform: translateY(-2px);
+}
+
+.time-button:active {
+    transform: scale(0.96);
+}
+
+.time-button.selected {
+    background:
+        linear-gradient(
+            135deg,
+            #8b7cf6,
+            #a68cff
+        );
+
+    border-color: #8b7cf6;
+
+    color: white;
+
+    box-shadow:
+        0 5px 15px
+        rgba(139, 124, 246, 0.3);
+}
+
+
+
+/* ========================================
+   DİĞER ÖĞRENCİLER
+======================================== */
+
+.other-students {
+    width: 100%;
+
+    margin-top: 7px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 3px;
+
+    max-height: 72px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    padding: 0 2px;
+
+    scrollbar-width: thin;
+}
+
+
+/* Her öğrenci ayrı satır */
+
+.student-tag {
+    display: block;
+
+    width: 100%;
+
+    max-width: 150px;
+
+    background: #f2efff;
+
+    color: #675bb0;
+
+    border-radius: 7px;
+
+    padding: 3px 6px;
+
+    font-size: 10px;
+
+    line-height: 1.3;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    flex-shrink: 0;
+}
+
+
+/* Birden fazla öğrenci olduğunda
+   alan kontrollü şekilde büyür */
+
+.other-students:has(.student-tag:nth-child(2)) {
+    max-height: 72px;
+}
+
+
+/* Mobil */
+
+@media (max-width: 600px) {
+
+    .other-students {
+        max-height: 60px;
+    }
+
+    .student-tag {
+        max-width: 125px;
+
+        font-size: 9px;
+
+        padding: 3px 5px;
+    }
+
+}
+
+
+
+/* ========================================
+   SÜRE POPUP
+======================================== */
+
+.duration-popup {
+    position: fixed;
+
+    z-index: 99999;
+
+    width: 220px;
+
+    background: white;
+
+    padding: 16px;
+
+    border-radius: 16px;
+
+    border:
+        1px solid
+        #e8e3f5;
+
+    box-shadow:
+        0 18px 45px
+        rgba(50, 40, 90, 0.22);
+}
+
+.popup-title {
+    font-weight: 800;
+
+    color: #39325d;
+
+    margin-bottom: 5px;
+
+    font-size: 14px;
+}
+
+.popup-subtitle {
+    font-size: 12px;
+
+    color: #898398;
+
+    margin-bottom: 12px;
+}
+
+.popup-buttons {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.popup-buttons button {
+    width: 100%;
+
+    border:
+        1px solid
+        #e8e4f5;
+
+    background: #faf9ff;
+
+    color: #554c7c;
+
+    padding: 10px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    font-size: 13px;
+
+    transition: 0.15s;
+}
+
+.popup-buttons button:hover {
+    background: #eeeaff;
+
+    border-color: #9a8cff;
+}
+
+
+/* ========================================
+   ALT BİLGİ
+======================================== */
+
+.bottom-note {
+    text-align: center;
+
+    color: #9993a9;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    padding: 8px 20px 25px;
+}
+
+
+/* ========================================
+   MOBİL
+======================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding:
+            22px 10px;
+    }
+
+    .header {
+        margin-bottom: 23px;
+    }
+
+    .header h1 {
+        font-size: 26px;
+    }
+
+    .header-icon {
+        width: 62px;
+        height: 62px;
+
+        font-size: 30px;
+    }
+
+    .card,
+    .day-card {
+        padding: 18px;
+
+        border-radius: 18px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+    }
+
+    .day-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+    .time-grid {
+        gap: 8px;
+    }
+
+    .time-wrapper {
+        min-width: 64px;
+    }
+
+    .time-button {
+        min-width: 64px;
+
+        padding:
+            10px 8px;
+
+        font-size: 13px;
+    }
+
+    .duration-popup {
+        width: 210px;
+    }
+
+}
+/* ======================================== BİLGİLENDİRME POP-UP ======================================== */ .info-popup { position: fixed; right: 22px; bottom: 22px; z-index: 1000; width: 300px; display: flex; gap: 12px; padding: 16px; background: rgba(255, 255, 255, 0.96); border: 1px solid #e7e1f7; border-radius: 17px; box-shadow: 0 12px 35px rgba(61, 47, 110, 0.15); backdrop-filter: blur(12px); } /* İKON */ .info-popup-icon { width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #eeeaff; border-radius: 11px; font-size: 19px; } /* YAZI */ .info-popup-content { flex: 1; } .info-popup-title { margin-bottom: 6px; color: #39325d; font-size: 14px; font-weight: 800; } .info-popup-content p { margin-bottom: 7px; color: #77718a; font-size: 11px; line-height: 1.5; } .info-popup-content p:last-child { margin-bottom: 0; } .info-popup-content strong { color: #675bb0; font-weight: 800; } /* MOBİL */ @media (max-width: 600px) { .info-popup { position: relative; right: auto; bottom: auto; width: 100%; margin-bottom: 20px; padding: 14px; } }
+
