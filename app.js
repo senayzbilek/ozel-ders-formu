@@ -97,6 +97,8 @@ let allAvailability = [];
 
 let editingDocumentId = null;
 
+let hasUnsavedChanges = false;
+
 
 // ========================================
 // SAAT FORMAT
@@ -380,6 +382,76 @@ function handleTimeClick(day, time) {
 
 
 // ========================================
+// DEĞİŞİKLİK YAPILDI
+// ========================================
+
+function markAsChanged() {
+
+    if (!editingDocumentId) {
+        return;
+    }
+
+    hasUnsavedChanges = true;
+
+    showUnsavedNotice();
+
+    updateSaveButton();
+
+    updateOtherStudents();
+
+}
+
+
+// ========================================
+// KAYDEDİLMEMİŞ DEĞİŞİKLİK UYARISI
+// ========================================
+
+function showUnsavedNotice() {
+
+    const notice =
+        document.getElementById(
+            "unsavedNotice"
+        );
+
+    if (!notice) {
+        return;
+    }
+
+    notice.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+// ========================================
+// KAYDET BUTONU
+// ========================================
+
+function updateSaveButton() {
+
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
+
+    if (!saveButton) {
+        return;
+    }
+
+    if (editingDocumentId) {
+
+        saveButton.textContent =
+            hasUnsavedChanges
+                ? "💾 Değişiklikleri Kaydet"
+                : "💾 Müsaitliklerimi Güncelle";
+
+    }
+
+}
+
+
+// ========================================
 // SÜRE MENÜSÜ
 // ========================================
 
@@ -498,60 +570,96 @@ function showDurationMenu(day, time) {
     document.body.appendChild(popup);
 
 
+    // ========================================
     // POPUP KONUMU
+    // ========================================
 
     const rect =
         target.getBoundingClientRect();
 
 
+    const isMobile =
+        window.innerWidth <= 600;
+
+
     const popupWidth =
-        window.innerWidth <= 600
-            ? Math.min(210, window.innerWidth - 30)
+        isMobile
+            ? Math.min(
+                210,
+                window.innerWidth - 20
+            )
             : 220;
 
 
     let left =
         rect.left;
 
+
     let top =
         rect.bottom + 8;
 
 
-    if (
-        left + popupWidth >
-        window.innerWidth - 10
-    ) {
+    // SAĞA TAŞMASIN
 
-        left =
+    left =
+        Math.min(
+            left,
             window.innerWidth -
             popupWidth -
-            10;
+            10
+        );
 
-    }
+
+    // SOLA TAŞMASIN
+
+    left =
+        Math.max(
+            10,
+            left
+        );
+
+
+    // ALTTA YER YOKSA ÜSTE AÇ
+
+    const estimatedPopupHeight =
+        popup.offsetHeight || 220;
 
 
     if (
-        top + 220 >
-        window.innerHeight
+        top + estimatedPopupHeight >
+        window.innerHeight - 10
     ) {
 
         top =
-            rect.top - 228;
+            rect.top -
+            estimatedPopupHeight -
+            8;
 
     }
+
+
+    // ÜSTTEN TAŞMASIN
+
+    top =
+        Math.max(
+            10,
+            top
+        );
 
 
     popup.style.width =
         `${popupWidth}px`;
 
     popup.style.left =
-        `${Math.max(10, left)}px`;
+        `${left}px`;
 
     popup.style.top =
-        `${Math.max(10, top)}px`;
+        `${top}px`;
 
 
+    // ========================================
     // SÜRE SEÇ
+    // ========================================
 
     popup
         .querySelectorAll(
@@ -617,7 +725,14 @@ function showDurationMenu(day, time) {
 
                         popup.remove();
 
+
                         updateButtonStates();
+
+                        // EKRANI ANINDA GÜNCELLE
+                        updateOtherStudents();
+
+                        // DÜZENLEME MODUNDA DEĞİŞİKLİK VAR
+                        markAsChanged();
 
                     }
                 );
@@ -626,7 +741,9 @@ function showDurationMenu(day, time) {
         );
 
 
+    // ========================================
     // SEÇİMİ KALDIR
+    // ========================================
 
     const removeButton =
         popup.querySelector(
@@ -667,7 +784,14 @@ function showDurationMenu(day, time) {
 
                 popup.remove();
 
+
                 updateButtonStates();
+
+                // ETİKETİ ANINDA KALDIR
+                updateOtherStudents();
+
+                // DEĞİŞİKLİK OLARAK İŞARETLE
+                markAsChanged();
 
             }
         );
@@ -675,7 +799,9 @@ function showDurationMenu(day, time) {
     }
 
 
+    // ========================================
     // DIŞARI TIKLAMA
+    // ========================================
 
     setTimeout(
         () => {
@@ -828,16 +954,39 @@ function updateOtherStudents() {
                 allAvailability.forEach(
                     record => {
 
+                        /*
+                         * DÜZENLEME YAPAN ÖĞRENCİ
+                         *
+                         * Firestore'daki eski kaydı değil,
+                         * ekrandaki geçici selectedSlots'u kullan.
+                         *
+                         * Böylece kullanıcı değişiklik yaptığında
+                         * ekran anında değişir.
+                         */
+
+                        let slots;
+
+
                         if (
-                            !record.availableTimes
+                            editingDocumentId &&
+                            record.id === editingDocumentId
                         ) {
 
-                            return;
+                            slots =
+                                selectedSlots;
+
+                        }
+
+                        else {
+
+                            slots =
+                                record.availableTimes ||
+                                [];
 
                         }
 
 
-                        record.availableTimes.forEach(
+                        slots.forEach(
                             slot => {
 
                                 if (
@@ -1146,7 +1295,13 @@ function editAvailability() {
             : [];
 
 
+    hasUnsavedChanges =
+        false;
+
+
     updateButtonStates();
+
+    updateOtherStudents();
 
 
     const badge =
@@ -1163,14 +1318,22 @@ function editAvailability() {
     );
 
 
-    const saveButton =
+    const notice =
         document.getElementById(
-            "saveButton"
+            "unsavedNotice"
         );
 
 
-    saveButton.textContent =
-        "💾 Müsaitliklerimi Güncelle";
+    if (notice) {
+
+        notice.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    updateSaveButton();
 
 
     document
@@ -1198,18 +1361,6 @@ async function updateAvailability() {
         return;
 
     }
-
-
-    /*
-     * BURADA ARTIK:
-     *
-     * selectedSlots.length === 0
-     *
-     * kontrolü YOK.
-     *
-     * Böylece öğrenci bütün saatlerini
-     * kaldırıp kaydedebilir.
-     */
 
 
     const saveButton =
@@ -1247,6 +1398,10 @@ async function updateAvailability() {
 
             }
         );
+
+
+        hasUnsavedChanges =
+            false;
 
 
         alert(
@@ -1313,8 +1468,12 @@ function clearForm() {
 
     editingDocumentId = null;
 
+    hasUnsavedChanges = false;
+
 
     updateButtonStates();
+
+    updateOtherStudents();
 
 
     const badge =
@@ -1331,6 +1490,21 @@ function clearForm() {
     );
 
 
+    const notice =
+        document.getElementById(
+            "unsavedNotice"
+        );
+
+
+    if (notice) {
+
+        notice.classList.add(
+            "hidden"
+        );
+
+    }
+
+
     const saveButton =
         document.getElementById(
             "saveButton"
@@ -1341,6 +1515,29 @@ function clearForm() {
         "🚀 Müsaitliklerimi Gönder";
 
 }
+
+
+// ========================================
+// SAYFADAN ÇIKARKEN UYARI
+// ========================================
+
+window.addEventListener(
+    "beforeunload",
+    function(event) {
+
+        if (
+            editingDocumentId &&
+            hasUnsavedChanges
+        ) {
+
+            event.preventDefault();
+
+            event.returnValue = "";
+
+        }
+
+    }
+);
 
 
 // ========================================
