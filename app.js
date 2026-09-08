@@ -19,7 +19,7 @@ import {
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyCU7XuFU7cd1hABh3WinJMeHmOEcnA6Euo",
+        "AIzaSyCU7XuCy7Fcd1hABh3WinJMeHmOEcnA6Euo",
 
     authDomain:
         "ozel-ders-90130.firebaseapp.com",
@@ -43,7 +43,6 @@ const firebaseConfig = {
 
 const app =
     initializeApp(firebaseConfig);
-
 
 const db =
     getFirestore(app);
@@ -111,13 +110,11 @@ function minutesToTime(minutes) {
     const minute =
         minutes % 60;
 
-
     return (
         String(hour).padStart(2, "0") +
         ":" +
         String(minute).padStart(2, "0")
     );
-
 }
 
 
@@ -140,7 +137,6 @@ function formatDuration(duration) {
     }
 
     return `${duration} saat`;
-
 }
 
 
@@ -155,7 +151,6 @@ function generateTimes(day) {
 
     const times = [];
 
-
     for (
         let minutes = settings.start;
         minutes <= settings.end;
@@ -168,9 +163,7 @@ function generateTimes(day) {
 
     }
 
-
     return times;
-
 }
 
 
@@ -183,12 +176,10 @@ function getDayDescription(day) {
     const settings =
         availability[day];
 
-
     return (
         `${minutesToTime(settings.start)} - ` +
         `${minutesToTime(settings.end)} arası`
     );
-
 }
 
 
@@ -203,7 +194,6 @@ function createDays() {
             "daysContainer"
         );
 
-
     if (!container) {
 
         console.error(
@@ -213,9 +203,7 @@ function createDays() {
         return;
     }
 
-
     container.innerHTML = "";
-
 
     Object.keys(availability)
         .forEach(day => {
@@ -264,13 +252,9 @@ function createDays() {
                 getDayDescription(day);
 
 
-            header.appendChild(
-                dayName
-            );
+            header.appendChild(dayName);
 
-            header.appendChild(
-                dayInfo
-            );
+            header.appendChild(dayInfo);
 
 
             // SAAT GRID
@@ -330,7 +314,6 @@ function createDays() {
 
                         event.stopPropagation();
 
-
                         handleTimeClick(
                             day,
                             time
@@ -357,33 +340,20 @@ function createDays() {
                     time;
 
 
-                wrapper.appendChild(
-                    button
-                );
+                wrapper.appendChild(button);
 
-                wrapper.appendChild(
-                    students
-                );
+                wrapper.appendChild(students);
 
-                timeGrid.appendChild(
-                    wrapper
-                );
+                timeGrid.appendChild(wrapper);
 
             });
 
 
-            dayCard.appendChild(
-                header
-            );
+            dayCard.appendChild(header);
 
-            dayCard.appendChild(
-                timeGrid
-            );
+            dayCard.appendChild(timeGrid);
 
-
-            container.appendChild(
-                dayCard
-            );
+            container.appendChild(dayCard);
 
         });
 
@@ -415,22 +385,15 @@ function handleTimeClick(day, time) {
 
 function showDurationMenu(day, time) {
 
-    // Eski popup varsa kapat
-
     const oldPopup =
         document.querySelector(
             ".duration-popup"
         );
 
-
     if (oldPopup) {
-
         oldPopup.remove();
-
     }
 
-
-    // Tıklanan butonu bul
 
     const target =
         Array.from(
@@ -456,8 +419,6 @@ function showDurationMenu(day, time) {
     }
 
 
-    // Mevcut seçim
-
     const existingSlot =
         selectedSlots.find(
             slot =>
@@ -472,7 +433,7 @@ function showDurationMenu(day, time) {
             : null;
 
 
-    // Popup
+    // POPUP
 
     const popup =
         document.createElement(
@@ -521,9 +482,10 @@ function showDurationMenu(day, time) {
                     ? `
                         <button
                             type="button"
+                            class="remove-button"
                             data-remove="true"
                         >
-                            Seçimi kaldır
+                            🗑️ Bu saati kaldır
                         </button>
                     `
                     : ""
@@ -533,50 +495,57 @@ function showDurationMenu(day, time) {
     `;
 
 
-    document.body.appendChild(
-        popup
-    );
+    document.body.appendChild(popup);
 
 
-    // Popup konumu
+    // POPUP KONUMU
 
     const rect =
         target.getBoundingClientRect();
 
 
+    const popupWidth =
+        window.innerWidth <= 600
+            ? Math.min(210, window.innerWidth - 30)
+            : 220;
+
+
     let left =
         rect.left;
-
 
     let top =
         rect.bottom + 8;
 
 
     if (
-        left + 220 >
-        window.innerWidth
+        left + popupWidth >
+        window.innerWidth - 10
     ) {
 
         left =
-            window.innerWidth - 230;
+            window.innerWidth -
+            popupWidth -
+            10;
 
     }
 
 
     if (
-        top + 210 >
+        top + 220 >
         window.innerHeight
     ) {
 
         top =
-            rect.top - 218;
+            rect.top - 228;
 
     }
 
 
+    popup.style.width =
+        `${popupWidth}px`;
+
     popup.style.left =
         `${Math.max(10, left)}px`;
-
 
     popup.style.top =
         `${Math.max(10, top)}px`;
@@ -647,7 +616,6 @@ function showDurationMenu(day, time) {
 
 
                         popup.remove();
-
 
                         updateButtonStates();
 
@@ -851,10 +819,8 @@ function updateOtherStudents() {
                 const day =
                     element.dataset.day;
 
-
                 const time =
                     element.dataset.time;
-
 
                 const students = [];
 
@@ -911,18 +877,13 @@ function updateOtherStudents() {
                                 "span"
                             );
 
-
                         tag.className =
                             "student-tag";
-
 
                         tag.textContent =
                             `${student.name} · ${formatDuration(student.duration)}`;
 
-
-                        element.appendChild(
-                            tag
-                        );
+                        element.appendChild(tag);
 
                     }
                 );
@@ -975,7 +936,7 @@ async function createNewAvailability() {
     ) {
 
         alert(
-            "Lütfen 4 haneli bir düzenleme kodu oluşturunuz."
+            "Lütfen 4 haneli bir düzenleme şifresi oluşturunuz."
         );
 
         return;
@@ -1004,7 +965,6 @@ async function createNewAvailability() {
 
     saveButton.disabled =
         true;
-
 
     saveButton.textContent =
         "⏳ Kaydediliyor...";
@@ -1036,13 +996,14 @@ async function createNewAvailability() {
 
 
         alert(
-            "Müsaitlikleriniz başarıyla kaydedildi! 🎉\n\nDüzenleme kodunuzu unutmayınız."
+            "Müsaitlikleriniz başarıyla kaydedildi! 🎉\n\nDüzenleme şifrenizi unutmayınız."
         );
 
 
         clearForm();
 
     }
+
 
     catch (error) {
 
@@ -1057,6 +1018,7 @@ async function createNewAvailability() {
         );
 
     }
+
 
     finally {
 
@@ -1113,7 +1075,7 @@ function editAvailability() {
     ) {
 
         alert(
-            "Lütfen 4 haneli düzenleme kodunuzu giriniz."
+            "Lütfen 4 haneli düzenleme şifrenizi giriniz."
         );
 
         return;
@@ -1152,7 +1114,7 @@ function editAvailability() {
     if (!record) {
 
         alert(
-            "Bu ad ve düzenleme koduyla eşleşen kayıt bulunamadı."
+            "Bu ad ve düzenleme şifresiyle eşleşen kayıt bulunamadı."
         );
 
         return;
@@ -1196,7 +1158,6 @@ function editAvailability() {
     badge.textContent =
         `✏️ ${record.studentName} adlı öğrencinin müsaitliklerini düzenliyorsunuz.`;
 
-
     badge.classList.remove(
         "hidden"
     );
@@ -1239,17 +1200,16 @@ async function updateAvailability() {
     }
 
 
-    if (
-        selectedSlots.length === 0
-    ) {
-
-        alert(
-            "En az bir saat seçmelisiniz."
-        );
-
-        return;
-
-    }
+    /*
+     * BURADA ARTIK:
+     *
+     * selectedSlots.length === 0
+     *
+     * kontrolü YOK.
+     *
+     * Böylece öğrenci bütün saatlerini
+     * kaldırıp kaydedebilir.
+     */
 
 
     const saveButton =
@@ -1260,7 +1220,6 @@ async function updateAvailability() {
 
     saveButton.disabled =
         true;
-
 
     saveButton.textContent =
         "⏳ Güncelleniyor...";
@@ -1291,13 +1250,16 @@ async function updateAvailability() {
 
 
         alert(
-            "Müsaitlikleriniz güncellendi! 🎉"
+            selectedSlots.length === 0
+                ? "Tüm müsaitlikleriniz kaldırıldı. 🎉"
+                : "Müsaitlikleriniz güncellendi! 🎉"
         );
 
 
         clearForm();
 
     }
+
 
     catch (error) {
 
@@ -1312,6 +1274,7 @@ async function updateAvailability() {
         );
 
     }
+
 
     finally {
 
@@ -1417,4 +1380,3 @@ document
 // ========================================
 
 createDays();
-

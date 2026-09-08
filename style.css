@@ -971,3 +971,135 @@ body {
     }
 }
 
+/* ========================================
+   MOBİL YATAY KAYMA DÜZELTMESİ
+======================================== */
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 850px;
+}
+
+.day-card,
+.student-card {
+    width: 100%;
+    max-width: 100%;
+}
+
+.time-grid {
+    width: 100%;
+    max-width: 100%;
+}
+
+.time-wrapper {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.other-students {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.student-tag {
+    min-width: 0;
+}
+
+
+/* ========================================
+   MOBİL
+======================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .card,
+    .day-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .time-grid {
+        width: 100%;
+        max-width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                auto-fit,
+                minmax(64px, 1fr)
+            );
+
+        gap: 8px;
+    }
+
+    .time-wrapper {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .time-button {
+        width: 100%;
+        min-width: 0;
+
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .other-students {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .student-tag {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .info-popup {
+        width: 100%;
+        max-width: 100%;
+    }
+
+}
+
+
+/* ========================================
+   POPUP MOBİL GÜVENLİ ALAN
+======================================== */
+
+.duration-popup {
+    max-width: calc(100vw - 20px);
+}
+
+@media (max-width: 600px) {
+
+    .duration-popup {
+        max-width: calc(100vw - 20px);
+    }
+
+}
